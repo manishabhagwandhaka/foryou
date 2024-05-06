@@ -1,0 +1,32 @@
+pipeline{
+
+agent any
+
+stages{
+
+stage("git pull"){
+
+steps{
+sh '''cd /home/hduser/Desktop/practice_cld/tp
+'''
+git(url: "https://github.com/docec/devops.git",
+branch: "main",
+changelog: true,
+poll: true,
+credentialsId: "git_id")
+}
+
+}
+
+stage("build"){
+    steps{
+sh ''' cd /home/hduser/Desktop/practice_cld/devops
+docker build -t qimg .
+docker run --name q1 -p 8000:80 -d qimg'''
+}
+        
+    }
+
+}
+
+}

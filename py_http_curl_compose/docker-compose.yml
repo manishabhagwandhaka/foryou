@@ -1,0 +1,13 @@
+services:
+  web1:
+    container_name: "webserver"
+    image: httpd
+    ports:
+      - '9000:80'
+  web3:
+    image: curlimages/curl
+    command: sh -c "pwd"
+
+    command: sh -c "apt-get -y update; apt-get -y install curl"
+    
+    command: sh -c "curl http://192.168.82.42:9000/"
